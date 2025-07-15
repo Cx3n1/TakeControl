@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://sthonlsw3k0l"]
+
+[ext_resource type="Script" path="res://TractorBeam/TractorBeam.gd" id="1_7ukbx"]
+[ext_resource type="PackedScene" uid="uid://dexsx0b3dnqje" path="res://Link/link.tscn" id="2_os7ih"]
+
+[node name="TractorBeam" type="Node2D" node_paths=PackedStringArray("pin", "links", "timer")]
+script = ExtResource("1_7ukbx")
+pin = NodePath("PinJoint2D")
+link = ExtResource("2_os7ih")
+links = NodePath("Links")
+timer = NodePath("Timer")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+
+[node name="Links" type="Node2D" parent="."]
+rotation = -0.00773248
+
+[node name="Timer" type="Timer" parent="."]

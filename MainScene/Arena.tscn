@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc25w24hyn5cm"]
+
+[ext_resource type="Script" path="res://MainScene/MainScene.gd" id="1_2qs4j"]
+[ext_resource type="PackedScene" uid="uid://bqsmqnx6rdqmi" path="res://Ship/GenericShip.tscn" id="2_deop2"]
+
+[node name="Arena" type="Node2D"]
+
+[node name="MultiplayerController" type="Node" parent="."]
+script = ExtResource("1_2qs4j")
+player_scene = ExtResource("2_deop2")
+
+[node name="Host" type="Button" parent="."]
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 71.0
+offset_bottom = 21.0
+text = "Host"
+
+[node name="Join" type="Button" parent="."]
+offset_left = 9.0
+offset_top = 47.0
+offset_right = 70.0
+offset_bottom = 63.0
+text = "Join"
+
+[node name="Node" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Node"]
+_spawnable_scenes = PackedStringArray("res://Ship/GenericShip.tscn")
+spawn_path = NodePath("../..")
+
+[connection signal="pressed" from="Host" to="MultiplayerController" method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="MultiplayerController" method="_on_join_pressed"]

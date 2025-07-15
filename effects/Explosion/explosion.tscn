@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dv113gbjwkh4g"]
+
+[ext_resource type="Texture2D" uid="uid://blhy8t6oriai2" path="res://assets/asteroididaanimacia/1.png" id="1_le4tt"]
+
+[sub_resource type="Gradient" id="Gradient_y71r6"]
+offsets = PackedFloat32Array(0, 0.453144, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.902855, 0.902855, 7.70092e-07, 1, 0.787251, 0.00228592, 1.92523e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rym6n"]
+gradient = SubResource("Gradient_y71r6")
+
+[sub_resource type="Curve" id="Curve_ydd2x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.639864, 0.727296), -1.12878, -1.12878, 0, 0, Vector2(0.83692, 0.483388), -1.54388, -1.54388, 0, 0, Vector2(1, 0.105668), -3.56103, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_huw37"]
+curve = SubResource("Curve_ydd2x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v2lok"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 250.0
+initial_velocity_max = 300.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+damping_min = 30.0
+damping_max = 30.0
+scale_min = 0.8
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_huw37")
+color_ramp = SubResource("GradientTexture1D_rym6n")
+
+[node name="explosion" type="GPUParticles2D"]
+position = Vector2(281, 194)
+emitting = false
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_v2lok")
+texture = ExtResource("1_le4tt")
+one_shot = true
+explosiveness = 1.0
+randomness = 0.09
+local_coords = true

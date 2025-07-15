@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://vm003vjtwsm7"]
+
+[ext_resource type="Texture2D" uid="uid://dsbumqh4oyb05" path="res://icon.svg" id="1_ua7ql"]
+[ext_resource type="Script" path="res://effects/Explosion/enemy.gd" id="2_7mkg4"]
+
+[node name="Main" type="Node2D"]
+
+[node name="enemy" type="Sprite2D" parent="."]
+self_modulate = Color(0.77047, 0.000375588, 0.121746, 1)
+position = Vector2(529, 313)
+texture = ExtResource("1_ua7ql")
+script = ExtResource("2_7mkg4")

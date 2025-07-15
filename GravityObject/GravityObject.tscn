@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://5l4a52yp8uhh"]
+
+[ext_resource type="Script" path="res://GravityObject/GravityObject.gd" id="1_yyrkx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vssvw"]
+radius = 1141.19
+
+[node name="GravityObject" type="Area2D"]
+collision_layer = 512
+collision_mask = 0
+script = ExtResource("1_yyrkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vssvw")

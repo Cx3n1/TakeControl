@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://dexsx0b3dnqje"]
+
+[ext_resource type="Script" path="res://Link/Link.gd" id="1_c4qxf"]
+[ext_resource type="Material" uid="uid://cfwpdiue07ne7" path="res://Link/link.tres" id="2_movmu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4rly0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xdnfk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4haf2"]
+radius = 11.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0jh18"]
+properties/0/path = NodePath("Line2D:points")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Line2D:width")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Line2D:default_color")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Line2D:joint_mode")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="Link" type="Node2D" node_paths=PackedStringArray("LinkShape", "Spring", "line")]
+material = SubResource("CanvasItemMaterial_4rly0")
+script = ExtResource("1_c4qxf")
+LinkShape = NodePath("Link")
+Spring = NodePath("DampedSpringJoint2D")
+line = NodePath("Line2D")
+
+[node name="Link" type="RigidBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+input_pickable = true
+mass = 0.25
+physics_material_override = SubResource("PhysicsMaterial_xdnfk")
+gravity_scale = 0.0
+custom_integrator = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Link"]
+shape = SubResource("CircleShape2D_4haf2")
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+material = ExtResource("2_movmu")
+node_a = NodePath("../Link")
+length = 1.0
+rest_length = 10.0
+stiffness = 50.0
+damping = 16.0
+
+[node name="Line2D" type="Line2D" parent="."]
+material = ExtResource("2_movmu")
+points = PackedVector2Array(0, -9, 0, 49)
+width = 5.0
+default_color = Color(2.88785e-06, 0.629998, 0.914574, 1)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_0jh18")

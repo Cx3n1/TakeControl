@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnf2j6hqwkqqt"]
+
+[ext_resource type="Texture2D" uid="uid://d3s8mub2os1hn" path="res://assets/parallax/ztatic.png" id="1_pbah5"]
+[ext_resource type="Texture2D" uid="uid://btha8cbc1mgva" path="res://assets/2nsd layer.png" id="2_bmdsi"]
+
+[node name="ParallaxBackground_" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+follow_viewport_enabled = true
+
+[node name="Galaxy" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Galaxy"]
+position = Vector2(713.5, 399)
+scale = Vector2(0.734896, 0.722222)
+texture = ExtResource("1_pbah5")
+
+[node name="Planets" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.7, 0.7)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Planets"]
+texture = ExtResource("2_bmdsi")

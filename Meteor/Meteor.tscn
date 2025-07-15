@@ -1,0 +1,293 @@
+[gd_scene load_steps=38 format=3 uid="uid://rbo7e32h751o"]
+
+[ext_resource type="Script" path="res://Meteor/Meteor.gd" id="1_sxb5r"]
+[ext_resource type="PackedScene" uid="uid://c8du3fljg0biw" path="res://Orb.tscn" id="2_jxajc"]
+[ext_resource type="PackedScene" uid="uid://cm5em3wu5bnyk" path="res://effects/damageNumber/Damage.tscn" id="2_mxx6j"]
+[ext_resource type="PackedScene" uid="uid://djax201qy6vgy" path="res://TractorObject/TractorObject.tscn" id="2_yqif6"]
+[ext_resource type="PackedScene" uid="uid://dke5d68kx8fpy" path="res://HealthObject/HealthObject.tscn" id="3_5awk6"]
+[ext_resource type="SpriteFrames" uid="uid://dna6l4c5swxka" path="res://Link/new_sprite_frames.tres" id="4_u3hwa"]
+[ext_resource type="Texture2D" uid="uid://2fy0gjmgsxy5" path="res://assets/asteroididaanimacia/beam/frame0000.png" id="5_s50di"]
+[ext_resource type="Texture2D" uid="uid://recav1tug0up" path="res://assets/asteroididaanimacia/beam/frame0001.png" id="6_d08p4"]
+[ext_resource type="Texture2D" uid="uid://dulmwj5363cxg" path="res://assets/asteroididaanimacia/beam/frame0002.png" id="7_lpcop"]
+[ext_resource type="Texture2D" uid="uid://boyoom6f74h0b" path="res://assets/asteroididaanimacia/beam/frame0003.png" id="8_j4srm"]
+[ext_resource type="Texture2D" uid="uid://dftam3vldtd1p" path="res://assets/asteroididaanimacia/beam/frame0004.png" id="9_hashe"]
+[ext_resource type="Texture2D" uid="uid://clvmslhymtxrs" path="res://assets/asteroididaanimacia/beam/frame0005.png" id="10_tnr15"]
+[ext_resource type="Texture2D" uid="uid://c7q583a10deai" path="res://assets/asteroididaanimacia/beam/frame0006.png" id="11_o4wnk"]
+[ext_resource type="Texture2D" uid="uid://bojookawybw8w" path="res://assets/asteroididaanimacia/beam/frame0007.png" id="12_gy8gf"]
+[ext_resource type="Texture2D" uid="uid://cveiih0b6bjgh" path="res://assets/asteroididaanimacia/beam/frame0008.png" id="13_4ox3b"]
+[ext_resource type="Texture2D" uid="uid://khx6ouh175tn" path="res://assets/asteroididaanimacia/beam/frame0009.png" id="14_ovntx"]
+[ext_resource type="Texture2D" uid="uid://r8rx8ytkw3dv" path="res://assets/asteroididaanimacia/beam/frame0010.png" id="15_6qgui"]
+[ext_resource type="Texture2D" uid="uid://cl627ajetogsa" path="res://assets/asteroididaanimacia/beam/frame0011.png" id="16_4aojn"]
+[ext_resource type="Texture2D" uid="uid://kgk1q33qk6hq" path="res://assets/asteroididaanimacia/beam/frame0012.png" id="17_0f736"]
+[ext_resource type="Texture2D" uid="uid://b62r4irsvj0fu" path="res://assets/asteroididaanimacia/beam/frame0013.png" id="18_fxppt"]
+[ext_resource type="Texture2D" uid="uid://lu8udxbr1ssj" path="res://assets/asteroididaanimacia/beam/frame0014.png" id="19_srv7q"]
+[ext_resource type="Texture2D" uid="uid://7l7jbobfufjr" path="res://assets/asteroididaanimacia/beam/frame0015.png" id="20_sdri4"]
+[ext_resource type="Texture2D" uid="uid://rq8kuox0xuxg" path="res://assets/asteroididaanimacia/beam/frame0016.png" id="21_ivw3k"]
+[ext_resource type="Texture2D" uid="uid://qu3tb8hr5a35" path="res://assets/asteroididaanimacia/beam/frame0017.png" id="22_1a3kv"]
+[ext_resource type="Texture2D" uid="uid://b5vhxp4xvwau2" path="res://assets/asteroididaanimacia/beam/frame0018.png" id="23_yicje"]
+[ext_resource type="Texture2D" uid="uid://ngh4wkvcmi8y" path="res://assets/asteroididaanimacia/beam/frame0019.png" id="24_5kgjj"]
+[ext_resource type="Texture2D" uid="uid://c7k14tx7dq2nn" path="res://assets/asteroididaanimacia/beam/frame0020.png" id="25_xgkll"]
+[ext_resource type="AnimationLibrary" uid="uid://b2cr2okkwxynx" path="res://Meteor/MeteorAnims.tres" id="27_pp0sv"]
+[ext_resource type="PackedScene" uid="uid://dv113gbjwkh4g" path="res://effects/Explosion/explosion.tscn" id="28_hhrvy"]
+[ext_resource type="AudioStream" uid="uid://d3k72gtt5d5lh" path="res://explo 1.mp3" id="28_psyiq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_e6xpy"]
+resource_local_to_scene = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_31k3h"]
+resource_local_to_scene = true
+radius = 65.0
+
+[sub_resource type="Shader" id="Shader_jcubk"]
+code = "shader_type canvas_item;
+
+uniform int start_frame = 0;
+uniform int current_frame = 0;
+uniform float mix_ratio = 1.0;
+
+const vec3 colors[6] = vec3[] (
+	vec3(1.0, 0.0, 0.0), // Red
+	vec3(0.5, 0.0, 0.0), // Dark red
+	vec3(0.0, 0.0, 0.0), // Black
+	vec3(0.0, 0.0, 1.0), // Blue
+	vec3(0.0, 0.0, 0.5), // Dark blue
+	vec3(0.0, 0.0, 0.0)  // Black
+);
+
+void fragment() {
+	// https://en.wikipedia.org/wiki/Rec._709#Luma_coefficients
+	float brightness = dot(COLOR.rgb, vec3(0.2126, 0.7152, 0.0722));
+
+	// Calculate the starting frame based on brightness
+	int offset = 0;
+	if (brightness > 0.75) {
+		offset = 2;
+	} else if (brightness > 0.25) {
+		offset = 1;
+	}
+
+	// Get the color, wrapping around at the end of the array
+	int color_index = (start_frame + current_frame + offset) % colors.length();
+	vec3 color = colors[color_index];
+
+	// Apply the color to the sprite
+	COLOR = vec4(mix(COLOR.rgb, color, mix_ratio), COLOR.a);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vieqp"]
+resource_local_to_scene = true
+shader = SubResource("Shader_jcubk")
+shader_parameter/start_frame = 0
+shader_parameter/current_frame = 0
+shader_parameter/mix_ratio = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qhcas"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_s50di")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_d08p4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lpcop")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_j4srm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hashe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_tnr15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_o4wnk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_gy8gf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_4ox3b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ovntx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_6qgui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_4aojn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_0f736")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_fxppt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_srv7q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_sdri4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_ivw3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_1a3kv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_yicje")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_5kgjj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_xgkll")
+}],
+"loop": false,
+"name": &"Explode",
+"speed": 25.0
+}]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3wx3s"]
+properties/0/path = NodePath(".:mass")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:gravity_scale")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:center_of_mass_mode")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:inertia")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:sleeping")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:can_sleep")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:linear_velocity")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath(".:linear_damp")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath(".:angular_velocity")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath(".:angular_damp")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+properties/10/path = NodePath(".:constant_force")
+properties/10/spawn = true
+properties/10/replication_mode = 1
+properties/11/path = NodePath(".:constant_torque")
+properties/11/spawn = true
+properties/11/replication_mode = 1
+properties/12/path = NodePath(".:disable_mode")
+properties/12/spawn = true
+properties/12/replication_mode = 1
+properties/13/path = NodePath(".:collision_layer")
+properties/13/spawn = true
+properties/13/replication_mode = 1
+properties/14/path = NodePath(".:collision_mask")
+properties/14/spawn = true
+properties/14/replication_mode = 1
+properties/15/path = NodePath(".:collision_priority")
+properties/15/spawn = true
+properties/15/replication_mode = 1
+properties/16/path = NodePath(".:input_pickable")
+properties/16/spawn = true
+properties/16/replication_mode = 1
+properties/17/path = NodePath(".:position")
+properties/17/spawn = true
+properties/17/replication_mode = 1
+properties/18/path = NodePath(".:rotation")
+properties/18/spawn = true
+properties/18/replication_mode = 1
+properties/19/path = NodePath(".:scale")
+properties/19/spawn = true
+properties/19/replication_mode = 1
+properties/20/path = NodePath(".:skew")
+properties/20/spawn = true
+properties/20/replication_mode = 1
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ipcmc"]
+random_pitch = 1.98
+streams_count = 1
+stream_0/stream = ExtResource("28_psyiq")
+
+[node name="RigidBody2D" type="RigidBody2D" node_paths=PackedStringArray("health_object", "collision_shape", "visibility_notifier", "timer", "anim_player", "animated_sprite", "damage", "explosion", "anim2", "explo")]
+collision_layer = 65
+collision_mask = 81
+physics_material_override = SubResource("PhysicsMaterial_e6xpy")
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 10
+script = ExtResource("1_sxb5r")
+health_object = NodePath("HealthObject")
+collision_shape = NodePath("CollisionShape2D")
+visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
+timer = NodePath("Timer")
+anim_player = NodePath("AnimationPlayer")
+animated_sprite = NodePath("AnimatedSprite2D")
+damage = NodePath("Damage")
+orb = ExtResource("2_jxajc")
+explosion = NodePath("Explosion")
+anim2 = NodePath("AnimatedSprite2D2")
+explo = NodePath("explosion")
+
+[node name="Damage" parent="." instance=ExtResource("2_mxx6j")]
+
+[node name="TractorObject" parent="." node_paths=PackedStringArray("parent_rigidbody") instance=ExtResource("2_yqif6")]
+parent_rigidbody = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_31k3h")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_vieqp")
+scale = Vector2(0.7, 0.7)
+sprite_frames = ExtResource("4_u3hwa")
+animation = &"Fade"
+
+[node name="explosion" parent="." instance=ExtResource("28_hhrvy")]
+position = Vector2(0, 0)
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_qhcas")
+animation = &"Explode"
+
+[node name="HealthObject" parent="." instance=ExtResource("3_5awk6")]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(3, 0)
+scale = Vector2(9.2, 8.5)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_3wx3s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": ExtResource("27_pp0sv")
+}
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_ipcmc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="health_run_out" from="HealthObject" to="." method="_on_health_run_out"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]

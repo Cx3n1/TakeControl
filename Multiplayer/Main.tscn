@@ -1,0 +1,103 @@
+[gd_scene load_steps=15 format=3 uid="uid://bxw275w6y7uu0"]
+
+[ext_resource type="Script" path="res://Multiplayer/select_character.gd" id="1_r4gna"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73lqh"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbrli"]
+bg_color = Color(0.0470588, 0.552941, 0.121569, 1)
+
+[sub_resource type="Theme" id="Theme_6nalm"]
+Button/fonts/font = null
+Button/styles/hover = SubResource("StyleBoxFlat_73lqh")
+Button/styles/normal = SubResource("StyleBoxFlat_fbrli")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qpyfm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ctgie"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_43jh1"]
+bg_color = Color(0.0470588, 0.552941, 0.121569, 1)
+
+[sub_resource type="Theme" id="Theme_j54it"]
+default_font_size = 22
+Button/styles/hover = SubResource("StyleBoxFlat_ctgie")
+Button/styles/normal = SubResource("StyleBoxFlat_43jh1")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7nqxv"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8my8"]
+bg_color = Color(0.0470588, 0.552941, 0.121569, 1)
+
+[sub_resource type="Theme" id="Theme_1j2do"]
+default_font_size = 18
+Button/styles/hover = SubResource("StyleBoxFlat_7nqxv")
+Button/styles/normal = SubResource("StyleBoxFlat_a8my8")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5o2lw"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tlp8y"]
+bg_color = Color(0.000123461, 0.0725711, 0.168384, 1)
+
+[sub_resource type="Theme" id="Theme_ng4uy"]
+OptionButton/styles/hover = SubResource("StyleBoxFlat_5o2lw")
+OptionButton/styles/normal = SubResource("StyleBoxFlat_tlp8y")
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -69.0
+offset_right = -78.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HostButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_6nalm")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_qpyfm")
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_j54it")
+text = "Join"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_1j2do")
+text = "Exit"
+
+[node name="SelectCharacter" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ng4uy")
+item_count = 3
+popup/item_0/text = "Jin"
+popup/item_1/text = "Tiger"
+popup/item_1/id = 1
+popup/item_2/text = "Comodo Princess"
+popup/item_2/id = 2
+script = ExtResource("1_r4gna")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HostButton" to="MarginContainer/VBoxContainer/SelectCharacter" method="_on_host_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/JoinButton" to="MarginContainer/VBoxContainer/SelectCharacter" method="_on_join_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="MarginContainer/VBoxContainer/SelectCharacter" method="_on_exit_button_pressed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/SelectCharacter" to="MarginContainer/VBoxContainer/SelectCharacter" method="_on_item_selected"]

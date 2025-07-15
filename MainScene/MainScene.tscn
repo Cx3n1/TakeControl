@@ -1,0 +1,150 @@
+[gd_scene load_steps=17 format=3 uid="uid://b2qb586m4ncbn"]
+
+[ext_resource type="Script" path="res://MainScene/GameState.gd" id="1_o82gu"]
+[ext_resource type="PackedScene" uid="uid://blsa3yv6ac3os" path="res://MeteorSpawner/AlienShipSpawner.tscn" id="2_6ogxi"]
+[ext_resource type="Script" path="res://MainScene/MainScene.gd" id="2_r8v8e"]
+[ext_resource type="PackedScene" uid="uid://cd40sfsjy4grr" path="res://MeteorSpawner/MeteorSpawner.tscn" id="2_rbl7u"]
+[ext_resource type="PackedScene" uid="uid://bqsmqnx6rdqmi" path="res://Ship/GenericShip.tscn" id="3_r7ylo"]
+[ext_resource type="AudioStream" uid="uid://drntie3ug30so" path="res://Audio/Combat.wav" id="6_e7la5"]
+[ext_resource type="Texture2D" uid="uid://co0pbapibgbd4" path="res://Screenshot 2025-07-06 184856.png" id="6_wxrlp"]
+[ext_resource type="AudioStream" uid="uid://cc0qpwp7h3y3c" path="res://Audio/Quiet.wav" id="7_vwrhg"]
+[ext_resource type="Script" path="res://MainScene/audio_controller.gd" id="8_7qo71"]
+[ext_resource type="Script" path="res://MainScene/Timer.gd" id="9_c4acb"]
+[ext_resource type="Script" path="res://MainScene/time_controller.gd" id="10_hund5"]
+[ext_resource type="VideoStream" path="res://muzik.ogv" id="12_vioe0"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jl7uy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oqgr1"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1oaye"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56kgj"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="MainScene" type="Node2D" node_paths=PackedStringArray("player_container", "meteor_container", "spawner", "meteor_spawner", "alien_spawner", "timer", "video")]
+script = ExtResource("1_o82gu")
+player_container = NodePath("Players")
+meteor_container = NodePath("Meteors")
+spawner = NodePath("MultiplayerSpawner")
+meteor_spawner = NodePath("MeteorSpawner")
+alien_spawner = NodePath("AlienShipSpawner")
+timer = NodePath("TimeController")
+video = NodePath("VideoStreamPlayer")
+
+[node name="AlienShipSpawner" parent="." instance=ExtResource("2_6ogxi")]
+
+[node name="Players" type="Node" parent="."]
+
+[node name="MultiplayerController" type="Node" parent="." node_paths=PackedStringArray("player_container", "menu", "game_state", "timer")]
+script = ExtResource("2_r8v8e")
+player_container = NodePath("../Players")
+player_scene = ExtResource("3_r7ylo")
+menu = NodePath("../Menu")
+game_state = NodePath("..")
+timer = NodePath("../TimeController")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Ship/GenericShip.tscn", "res://Meteor/Meteor.tscn")
+spawn_path = NodePath("..")
+
+[node name="Meteors" type="Node" parent="."]
+
+[node name="MeteorSpawner" parent="." instance=ExtResource("2_rbl7u")]
+
+[node name="AudioController" type="Node" parent="." node_paths=PackedStringArray("combat", "quiet")]
+script = ExtResource("8_7qo71")
+combat = NodePath("Combat")
+quiet = NodePath("Quiet")
+
+[node name="Combat" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("6_e7la5")
+
+[node name="Quiet" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("7_vwrhg")
+autoplay = true
+mix_target = 1
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 374.0
+offset_top = 269.0
+offset_right = 414.0
+offset_bottom = 309.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_c4acb")
+countdown_time = 70.0
+auto_start = true
+
+[node name="TimeController" type="Node" parent="."]
+script = ExtResource("10_hund5")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect2" type="TextureRect" parent="Menu"]
+layout_mode = 0
+offset_left = -52.0
+offset_top = -14.0
+offset_right = 1221.0
+offset_bottom = 676.0
+texture = SubResource("CanvasTexture_jl7uy")
+
+[node name="Host" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 517.0
+offset_right = 681.0
+offset_bottom = 594.0
+theme_override_colors/font_color = Color(0.433084, 0.0570211, 0, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_oqgr1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1oaye")
+theme_override_styles/normal = SubResource("StyleBoxFlat_56kgj")
+text = "Play"
+
+[node name="Join" type="Button" parent="Menu"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 47.0
+offset_right = 70.0
+offset_bottom = 78.0
+text = "Join"
+
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 228.0
+offset_top = 9.0
+offset_right = 902.0
+offset_bottom = 441.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_wxrlp")
+expand_mode = 1
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+visible = false
+offset_right = 1155.0
+offset_bottom = 642.0
+stream = ExtResource("12_vioe0")
+expand = true
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="Menu/Host" to="MultiplayerController" method="_on_host_pressed"]
+[connection signal="pressed" from="Menu/Join" to="MultiplayerController" method="_on_join_pressed"]

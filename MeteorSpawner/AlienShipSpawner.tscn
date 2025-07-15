@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://blsa3yv6ac3os"]
+
+[ext_resource type="Script" path="res://MeteorSpawner/alien_spawner.gd" id="1_ivsoi"]
+[ext_resource type="PackedScene" uid="uid://b7g1hx37jhw6y" path="res://AlienShip/AlienShip.tscn" id="2_o8g5n"]
+
+[sub_resource type="Curve" id="Curve_j1sh3"]
+_data = [Vector2(0.140562, 0.265599), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="AlienShipSpawner" type="Node2D"]
+script = ExtResource("1_ivsoi")
+meteor = ExtResource("2_o8g5n")
+curve = SubResource("Curve_j1sh3")

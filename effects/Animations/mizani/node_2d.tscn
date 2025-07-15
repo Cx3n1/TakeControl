@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4hor1j3b31ju"]
+
+[ext_resource type="Texture2D" uid="uid://3sw8qjmrcuv2" path="res://assets/bevriertad/mizani/frame0000.png" id="1_qquw1"]
+[ext_resource type="Texture2D" uid="uid://dbnyapwyvpa4g" path="res://assets/bevriertad/mizani/frame0001.png" id="2_qdpiw"]
+[ext_resource type="Texture2D" uid="uid://3dhqmrvs5k50" path="res://assets/bevriertad/mizani/frame0002.png" id="3_ihs2t"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_117in"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qquw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qdpiw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ihs2t")
+}],
+"loop": true,
+"name": &"mizani",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(514, 107)
+sprite_frames = SubResource("SpriteFrames_117in")
+animation = &"mizani"
+autoplay = "mizani"

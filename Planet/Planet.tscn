@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvt4wrixwfvrh"]
+
+[ext_resource type="Script" path="res://Planet/Planet.gd" id="1_lpi4y"]
+[ext_resource type="PackedScene" uid="uid://5l4a52yp8uhh" path="res://GravityObject/GravityObject.tscn" id="2_qqqkc"]
+[ext_resource type="Texture2D" uid="uid://dsbumqh4oyb05" path="res://icon.svg" id="3_4hdep"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c1vvo"]
+radius = 495.122
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fisig"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4hdep")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="RigidBody2D" type="RigidBody2D" node_paths=PackedStringArray("sprite", "collision_shape")]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_lpi4y")
+sprite = NodePath("AnimatedSprite2D")
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c1vvo")
+
+[node name="GravityObject" parent="." instance=ExtResource("2_qqqkc")]
+
+[node name="CollisionShape2D" parent="GravityObject" index="0"]
+debug_color = Color(0.286361, 0.357441, 0, 0.42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(17.5, 4.5)
+scale = Vector2(7.61719, 5.55469)
+sprite_frames = SubResource("SpriteFrames_fisig")
+
+[editable path="GravityObject"]

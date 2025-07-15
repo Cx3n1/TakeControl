@@ -1,0 +1,165 @@
+[gd_scene load_steps=33 format=3 uid="uid://c8du3fljg0biw"]
+
+[ext_resource type="Texture2D" uid="uid://dsl8c5j44cp1t" path="res://assets/Coin/frame0000.png" id="1_6eph8"]
+[ext_resource type="Script" path="res://orb.gd" id="1_ev8xx"]
+[ext_resource type="Texture2D" uid="uid://d1qgf0dlurjck" path="res://assets/Coin/frame0001.png" id="2_dt3nn"]
+[ext_resource type="PackedScene" uid="uid://cm5em3wu5bnyk" path="res://effects/damageNumber/Damage.tscn" id="2_ebkim"]
+[ext_resource type="Texture2D" uid="uid://su1n6spuc4fv" path="res://assets/Coin/frame0002.png" id="3_1a1q3"]
+[ext_resource type="Texture2D" uid="uid://fjgw7p3id4pr" path="res://assets/Coin/frame0003.png" id="4_hsqwt"]
+[ext_resource type="Texture2D" uid="uid://6ilk57u1ef1q" path="res://assets/Coin/frame0004.png" id="5_x781r"]
+[ext_resource type="Texture2D" uid="uid://byjr0i8f1516i" path="res://assets/Coin/frame0005.png" id="6_npe1n"]
+[ext_resource type="Texture2D" uid="uid://3kd7hnhbjn3x" path="res://assets/Coin/frame0006.png" id="7_2psf7"]
+[ext_resource type="Texture2D" uid="uid://ba8fircsjhfc7" path="res://assets/Coin/frame0007.png" id="8_nkjig"]
+[ext_resource type="Texture2D" uid="uid://beb5gl33kvlls" path="res://assets/Coin/frame0008.png" id="9_ojbiv"]
+[ext_resource type="Texture2D" uid="uid://bcg45dy2tihbl" path="res://assets/Coin/frame0009.png" id="10_xna1d"]
+[ext_resource type="Texture2D" uid="uid://twss8t2s7sn" path="res://assets/Coin/frame0010.png" id="11_m15et"]
+[ext_resource type="Texture2D" uid="uid://da2tkydpjrmnc" path="res://assets/Coin/frame0011.png" id="12_4byq6"]
+[ext_resource type="Texture2D" uid="uid://dd5u7ctkyr4iy" path="res://assets/Coin/frame0012.png" id="13_tqjpl"]
+[ext_resource type="Texture2D" uid="uid://cyi6f6et0h5l0" path="res://assets/Coin/frame0013.png" id="14_3i8cg"]
+[ext_resource type="Texture2D" uid="uid://cagt0ny1qgvro" path="res://assets/Coin/frame0014.png" id="15_sv4u0"]
+[ext_resource type="Texture2D" uid="uid://d0jygn7wfpvoe" path="res://assets/Coin/frame0015.png" id="16_ca421"]
+[ext_resource type="Texture2D" uid="uid://dee3ysnyvii7w" path="res://assets/Coin/frame0016.png" id="17_18yld"]
+[ext_resource type="Texture2D" uid="uid://p7ahmtdh8brd" path="res://assets/Coin/frame0017.png" id="18_jphrj"]
+[ext_resource type="Texture2D" uid="uid://dueweusxfcab6" path="res://assets/Coin/frame0018.png" id="19_sltgr"]
+[ext_resource type="Texture2D" uid="uid://bac0kvd7kmf7f" path="res://assets/Coin/frame0019.png" id="20_a8swh"]
+[ext_resource type="Texture2D" uid="uid://dbmc3t3eo4kkw" path="res://assets/Coin/frame0020.png" id="21_akgus"]
+[ext_resource type="Texture2D" uid="uid://dnk540xt4k1v8" path="res://assets/Coin/frame0021.png" id="22_bpdjw"]
+[ext_resource type="Texture2D" uid="uid://dmh8rr4oemdy5" path="res://assets/Coin/frame0022.png" id="23_giol1"]
+[ext_resource type="Texture2D" uid="uid://cb7mug5u5gkof" path="res://assets/Coin/frame0023.png" id="24_hf3ne"]
+[ext_resource type="Texture2D" uid="uid://bqnb0kvumscym" path="res://assets/Coin/frame0024.png" id="25_gwbs6"]
+[ext_resource type="AudioStream" uid="uid://bet0qf1cbps5m" path="res://Audio/coin.wav" id="27_t2ymm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k5p1t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e0nrx"]
+radius = 74.9667
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l8iiv"]
+radius = 497.805
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6f303"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6eph8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_dt3nn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1a1q3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hsqwt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_x781r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_npe1n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2psf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nkjig")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ojbiv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_xna1d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_m15et")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4byq6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_tqjpl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_3i8cg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_sv4u0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ca421")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_18yld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_jphrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_sltgr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_a8swh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_akgus")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_bpdjw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_giol1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_hf3ne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_gwbs6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="RigidBody2D" type="RigidBody2D" node_paths=PackedStringArray("player_detector", "timer", "coin_sfx", "sprite", "damage")]
+collision_layer = 4
+collision_mask = 0
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_k5p1t")
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_ev8xx")
+player_detector = NodePath("PlayerDetector")
+move_speed = 1000.0
+min_distance = 100.0
+timer = NodePath("Timer")
+coin_sfx = NodePath("Coin")
+sprite = NodePath("AnimatedSprite2D")
+damage = NodePath("Damage")
+
+[node name="Damage" parent="." instance=ExtResource("2_ebkim")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e0nrx")
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+shape = SubResource("CircleShape2D_l8iiv")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_6f303")
+frame_progress = 0.798792
+offset = Vector2(93.68, 78.79)
+
+[node name="Coin" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("27_t2ymm")
+volume_db = 24.0
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_body_entered"]
